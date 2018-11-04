@@ -34,3 +34,5 @@ class Transaction {
         return true;
     }
 }
+
+module.exports = Transaction;

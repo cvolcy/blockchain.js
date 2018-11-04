@@ -1,3 +1,5 @@
+const Transaction = require("./transaction");
+
 class Block {
     /**
      * @param {number} timestamp
@@ -34,3 +36,5 @@ class Block {
         // TODO: check if the current block is valid
     }
 }
+
+module.exports = Block;

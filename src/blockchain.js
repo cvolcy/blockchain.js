@@ -1,3 +1,6 @@
+const Block = require("./models/block");
+const Transaction = require("./models/transaction");
+
 class Blockchain {
      /**
      * @param {number} difficulty
@@ -14,7 +17,7 @@ class Blockchain {
      * @returns {Block}
      */
     createGenesisBlock() {
-        return new Block(Date.now, [], '0');
+        return new Block(Date.now(), [], '0');
     }
 
     /**
@@ -58,3 +61,5 @@ class Blockchain {
         return true;
     }
 }
+
+module.exports = Blockchain;

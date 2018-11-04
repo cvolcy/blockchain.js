@@ -1,0 +1,19 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "A simple JS implementation of Blockchain.",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cvolcy/blockchain.js.git"
+  },
+  "author": "Clervens Volcy <clervens.volcy@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cvolcy/blockchain.js/issues"
+  },
+  "homepage": "https://github.com/cvolcy/blockchain.js#readme"
+}

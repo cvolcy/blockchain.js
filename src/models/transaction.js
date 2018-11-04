@@ -1,3 +1,6 @@
+const SHA256 = require("crypto-js/sha256");
+const hex = require("crypto-js/enc-hex");
+
 class Transaction {
     /**
      * @param {string} fromAddress
@@ -12,11 +15,14 @@ class Transaction {
     }
 
     /**
+     * Return the hash value of the current transaction.
+     * 
      * @returns {string}
      */
     calculateHash() {
-        // TODO: return the hash value of the current transaction.
-        return "";
+        return SHA256(
+            `${this.timestamp} - ${this.fromAddress}${this.toAddress} - ${this.amount}`
+        ).toString(hex);
     }
 
     /**

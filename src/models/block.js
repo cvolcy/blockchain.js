@@ -1,3 +1,5 @@
+const SHA256 = require("crypto-js/sha256");
+const hex = require("crypto-js/enc-hex");
 const Transaction = require("./transaction");
 
 class Block {
@@ -18,8 +20,9 @@ class Block {
      * @returns {string}
      */
     calculateHash() {
-        // TODO: return the hash value of the current block
-        return "";
+        return SHA256(
+            `${this.timestamp} - ${this.hash}${this.previousHash} - ${this.nonce} - ${JSON.stringify(this.transactions)}`
+        ).toString(hex);
     }
 
     /**

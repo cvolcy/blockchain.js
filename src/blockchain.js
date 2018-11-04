@@ -63,13 +63,28 @@ class Blockchain {
     }
 
     /**
+     * Get the balance of the wallet at the given address. 
+     * Loop through each blocks to get the history of a wallet.
+     * 
      * @param {string} address
      * @returns {number} The balance of the wallet
      */
     getBalanceOfAddress(address) {
-        // TODO: Get the balance of the wallet at the address given.
-        // loop through each block to get the history of a wallet.
-        return 0;
+        let balance = 0;
+
+        for (const block of this.chain) {
+            for (const tx of block.transactions) {
+                if (tx.fromAddress === address) {
+                    balance -= tx.amount;
+                }
+
+                if (tx.toAddress === address) {
+                    balance += tx.amount;
+                }
+            }
+        }
+
+        return balance;
     }
 
     /**

@@ -12,8 +12,8 @@ class Block {
         this.timestamp = timestamp;
         this.transactions = transactions;
         this.previousHash = previousHash;
-        this.hash = this.calculateHash();
         this.nonce = 0;
+        this.hash = this.calculateHash();
     }
 
     /**
@@ -21,7 +21,7 @@ class Block {
      */
     calculateHash() {
         return SHA256(
-            `${this.timestamp} - ${this.hash}${this.previousHash} - ${this.nonce} - ${JSON.stringify(this.transactions)}`
+            `${this.timestamp} - ${this.previousHash} - ${this.nonce} - ${JSON.stringify(this.transactions)}`
         ).toString(hex);
     }
 
@@ -33,10 +33,18 @@ class Block {
     }
 
     /**
+     * Check if the current block is valid
+     * 
      * @returns {boolean}
      */
     hasValidTransactions() {
-        // TODO: check if the current block is valid
+        for (const transaction of this.transactions) {
+            if (!transaction.isValid()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 

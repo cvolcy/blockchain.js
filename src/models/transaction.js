@@ -36,7 +36,12 @@ class Transaction {
      * @returns {boolean}
      */
     isValid() {
-        // TODO: check if the current transaction is valid.
+        if (this.fromAddress === null) return true;
+
+        if (this.toAddress === null) return false;
+
+        if (this.amount < 0) return false;
+
         return true;
     }
 }

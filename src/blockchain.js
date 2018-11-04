@@ -17,7 +17,7 @@ class Blockchain {
      * @returns {Block}
      */
     createGenesisBlock() {
-        return new Block(Date.now(), [], '0');
+        return new Block(Date.parse('1991-01-01'), [], '0');
     }
 
     /**
@@ -54,10 +54,34 @@ class Blockchain {
     }
 
     /**
+     * Check if the blockchain is valid
+     * 
      * @returns {boolean}
      */
     isChainValid() {
-        // TODO: check if the blockchain is valid
+        const genesisHash = this.createGenesisBlock().hash;
+
+        if (genesisHash !== this.chain[0].calculateHash()) {
+            return false;
+        }
+
+        for (let i = 1; i < this.chain.length; i++) {
+            const currentBlock = this.chain[i];
+            const previousBlock = this.chain[i - 1];
+
+            if (!currentBlock.hasValidTransactions()) {
+                return false;
+            }
+
+            if (currentBlock.hash !== currentBlock.calculateHash()) {
+                return false;
+            }
+
+            if (currentBlock.previousHash !== previousBlock.calculateHash()) {
+                return false;
+            }
+        }
+
         return true;
     }
 }

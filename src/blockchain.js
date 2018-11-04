@@ -28,19 +28,38 @@ class Blockchain {
     }
 
     /**
+     * Mine all pending transactions and give reward to the miner.
+     * 
      * @param {string} minerAddress
      */
     minePendingTransactions(minerAddress) {
-        // TODO: mine all pending transactions and give reward to the miner.
+        const rewardTx = new Transaction(null, minerAddress, this.reward);
+        this.pendingTransactions.push(rewardTx);
+
+        let block = new Block(Date.now(), this.pendingTransactions, this.getLastBlock().hash);
+        block.mineBlock(this.difficulty);
+
+        console.log('Block successfully mined!');
+        this.chain.push(block);
+
+        this.pendingTransactions = [];
     }
 
     /**
      * @param {Transaction} transaction
-     * @throws {Error} When transaction is not valid
      * @throws {Error} When from or to addresses are not present in the transaction.
+     * @throws {Error} When transaction is not valid
      */
     addTransaction(transaction) {
-        // TODO: add a transaction in the pending list
+        if (!transaction.fromAddress || !transaction.toAddress) {
+            throw new Error('Transaction must include from and to address');
+        }
+
+        if (!transaction.isValid()) {
+            throw new Error('Cannot add invalid transaction to chain');
+        }
+
+        this.pendingTransactions.push(transaction);
     }
 
     /**

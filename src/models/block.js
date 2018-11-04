@@ -26,10 +26,19 @@ class Block {
     }
 
     /**
+     * Mine current block with the specified difficulty.
+     * 
      * @param {number} difficulty
      */
     mineBlock(difficulty) {
-        // TODO : mine current block with specified difficulty
+        const difficultyMask = Array(difficulty + 1).join('0');
+        
+        while (this.hash.substring(0, difficulty) !== difficultyMask) {
+            this.nonce++;
+            this.hash = this.calculateHash();
+        }
+
+        console.log(`Block mined: ${this.hash}`);
     }
 
     /**

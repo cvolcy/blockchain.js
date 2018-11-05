@@ -39,7 +39,6 @@ class Blockchain {
         let block = new Block(Date.now(), this.pendingTransactions, this.getLastBlock().hash);
         block.mineBlock(this.difficulty);
 
-        console.log('Block successfully mined!');
         this.chain.push(block);
 
         this.pendingTransactions = [];
